@@ -238,6 +238,29 @@ Pour les PRs, un workflow GitHub Actions `Evals Smoke` résout les skills impact
 
 Le format `evals.json` est compatible avec le [framework officiel anthropics/skills](https://github.com/anthropics/skills/tree/main/skills/skill-creator).
 
+### Mistral Vibe Benchmarks
+
+Pour exécuter les benchmarks avec les modèles Mistral (mistral-medium-3-5 pour l'évaluation, mistral-small-2603 pour le grading) :
+
+```bash
+# Installer les dépendances
+uv run --project evals pip install mistralai
+
+# Lancer les evals avec Mistral
+MISTRAL_API_KEY=your_api_key uv run --project evals python evals/run_evals_mistral.py
+
+# Un seul skill
+MISTRAL_API_KEY=your_api_key uv run --project evals python evals/run_evals_mistral.py --skill fiscaliste
+
+# Réutiliser le cache
+MISTRAL_API_KEY=your_api_key uv run --project evals python evals/run_evals_mistral.py --reuse-cache
+
+# Plan seulement (pas d'exécution)
+python evals/run_evals_mistral.py --plan-only
+```
+
+Configuration dans `evals/config-mistral.yaml` : modèle `mistral-medium-3-5`, grading avec `mistral-small-2603`. Les modèles sont fixes (pas de `latest`) pour des résultats reproductibles.
+
 ---
 
 ## Avertissement légal

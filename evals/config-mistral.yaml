@@ -1,0 +1,25 @@
+workspace: evals-workspace
+model: mistral-medium-3-5
+grading_model: mistral-small-2603
+
+global_paths:
+  - evals/
+  - package.json
+
+skills:
+  comptable:
+    path: comptable
+    baseline_prompt: "Tu es un expert-comptable. Aide avec cette question de comptabilité française."
+    tools: "read_file,bash,write_file"
+    shared_paths:
+      - data/
+      - scripts/
+      - templates/
+      - integrations/
+      - company.example.json
+  fiscaliste:
+    path: fiscaliste
+    baseline_prompt: "Tu es un fiscaliste spécialisé en fiscalité des particuliers français. Réponds à cette question avec les calculs détaillés."
+    tools: "read_file"
+    shared_paths:
+      - fiscaliste/foyer.example.json
